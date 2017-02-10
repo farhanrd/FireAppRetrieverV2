@@ -11,8 +11,7 @@
     android:clickable="true"
     android:background="?android:attr/selectableItemBackground">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:weightSum="1"
         android:layout_height="wrap_content"
@@ -24,42 +23,53 @@
         android:layout_marginStart="1dp">
 
 
-        <TextView
-                android:text="IDE"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/like"
+            android:layout_toStartOf="@+id/like"
+            android:layout_alignTop="@+id/like">
+
+            <TextView
+                android:text="IDEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/judulidesp"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
                 android:textColor="#1D194F"
                 android:textStyle="bold"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:layout_weight="1" />
 
             <TextView
-                android:text="Nama pembuat"
+                android:text="Nama pembuatdddddddddddddddddddddddddd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/namapembuatsp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
                 android:textColor="#1D194F"
-                android:textSize="15sp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            card_view:srcCompat="@mipmap/ic_thumb_up_white_24dp"
-            android:id="@+id/imageButton2"
-            android:layout_margin="10dp"
-            android:layout_gravity="right" />
+                android:textSize="15sp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
 
-    </LinearLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_thumb_up_white_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/like"
+                android:layout_margin="10dp"/>
+
+
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>
-
-

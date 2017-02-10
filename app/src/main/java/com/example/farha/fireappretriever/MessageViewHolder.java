@@ -46,7 +46,7 @@ public  class MessageViewHolder extends RecyclerView.ViewHolder {
         mSifatperbaikan = (TextView) v.findViewById(R.id.sifatperbaikansp);
         mUraianproses = (TextView) v.findViewById(R.id.uraianprosessp);
         mEvaluasihasil = (TextView) v.findViewById(R.id.evaluasihasilsp);
-        mLikebtn = (ImageButton) v.findViewById(R.id.imageButton2);
+        mLikebtn = (ImageButton) v.findViewById(R.id.like);
 
         mDatabase = FirebaseDatabase.getInstance(); //getReference();
         mDatabaseChat = mDatabase.getReference("chat");
