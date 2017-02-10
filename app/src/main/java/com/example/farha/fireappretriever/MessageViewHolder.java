@@ -11,8 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farha.fireappretriever.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -22,6 +25,7 @@ public  class MessageViewHolder extends RecyclerView.ViewHolder {
     FirebaseDatabase mDatabase;
     DatabaseReference mDatabaseChat;
     DatabaseReference mDatabaseLike;
+    String post_key;
 
     TextView mJudulide, mNamapembuat, mTanggalpenemuan, mLokasipenemuan, mNrp, mDept, mHubpenemuan, mMasalah, mUraianmasalah, mIde, mSifatperbaikan, mUraianproses, mEvaluasihasil;
 
@@ -42,17 +46,29 @@ public  class MessageViewHolder extends RecyclerView.ViewHolder {
         mSifatperbaikan = (TextView) v.findViewById(R.id.sifatperbaikansp);
         mUraianproses = (TextView) v.findViewById(R.id.uraianprosessp);
         mEvaluasihasil = (TextView) v.findViewById(R.id.evaluasihasilsp);
-
         mLikebtn = (ImageButton) v.findViewById(R.id.imageButton2);
-        mLikebtn.setOnClickListener(new View.OnClickListener() {
+
+        mDatabase = FirebaseDatabase.getInstance(); //getReference();
+        mDatabaseChat = mDatabase.getReference("chat");
+
+    }
+
+    public void setmLikebtn(final String post_key){
+        mDatabaseChat.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-               {mLikebtn.setImageResource(R.mipmap.ic_thumb_up_black_24dp);}
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child(post_key).child("Likes").getValue().toString().equals("false")) {
+                  mLikebtn.setImageResource(R.mipmap.ic_thumb_up_white_24dp);
+                } else {
+                    mLikebtn.setImageResource(R.mipmap.ic_thumb_up_black_24dp);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
-
     }
 
     public void setJudulide(String Judulide) {

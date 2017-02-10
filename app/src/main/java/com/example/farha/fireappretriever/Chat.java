@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by felix on 23 Okt 2016.
  */
 
-public class Chat {
+public class  Chat {
     private String judulide, namapembuat, tanggalpenemuan, lokasipenemuan, nrp, dept, hubpenemuan, masalah, uraianmasalah, ide, sifatperbaikan, uraianproses, evaluasihasil, bool  ;
 
 

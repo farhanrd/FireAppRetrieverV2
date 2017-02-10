@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+    //    mAuth = FirebaseAuth.getInstance();
 
         Firebase.setAndroidContext(this);
         mjudulide = (TextView) findViewById(R.id.judulidesp);
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance(); //getReference();
         mDatabaseChat = mDatabase.getReference("chat");
+        mDatabaseLike = mDatabase.getReference("likes");
        // mDatabaseLike = FirebaseDatabase.getInstance().getReference().child("Likes");
 
 //        mDatabaseLike.keepSynced(true);
@@ -116,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(MessageViewHolder viewHolder, Chat chat, final int position) {
                 final String post_key = getRef(position).getKey();
+
+                viewHolder.setmLikebtn(post_key);
                 //final String post_key1 = getRef(position).getKey();
                      //viewHolder.setName(Chat.getName());
                 //    viewHolder.setText(Chat.getText());
@@ -144,6 +147,38 @@ public class MainActivity extends AppCompatActivity {
                         Intent desc = new Intent(MainActivity.this,DescriptionActivity.class);
                         desc.putExtra("posisiItemRecycler",post_key);
                         startActivity(desc);
+                    }
+                });
+
+                viewHolder.mLikebtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mProcessLike = true;
+
+                            mDatabaseChat.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                                    if (mProcessLike) {
+
+                                        if (dataSnapshot.child(post_key).child("Likes").getValue().toString().equals("false")) {
+                                            // like -> ga ngelike
+                                            mDatabaseChat.child(post_key).child("Likes").setValue("true");
+                                            mProcessLike = false;
+
+                                        } else {
+                                            //belum ngelike -> like
+                                            mDatabaseChat.child(post_key).child("Likes").setValue("false");
+                                            mProcessLike = false;
+                                        }
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
                     }
                 });
 
